@@ -47,7 +47,7 @@ readonly abstract class Input implements ReadableInterface
      * @return Generator
      * @see self::stream() for documentation
      */
-    protected function streamInternal(mixed $handle, bool $filterEmpty, int $offset, int $count = null): Generator
+    protected function streamInternal(mixed $handle, bool $filterEmpty, int $offset, ?int $count = null): Generator
     {
         return yield from self::stream($handle, $filterEmpty, $offset, $count, ...$this->filters);
     }
@@ -64,7 +64,7 @@ readonly abstract class Input implements ReadableInterface
      * @return Generator
      * @see ReadableInterface::read() for documentation
      */
-    public static function stream(mixed               $handle, bool $filterEmpty, int $offset, int $count = null,
+    public static function stream(mixed               $handle, bool $filterEmpty, int $offset, ?int $count = null,
                                   FilterableInterface ...$filters): Generator
     {
         if (!is_resource($handle)) {

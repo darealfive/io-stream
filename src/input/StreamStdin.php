@@ -18,7 +18,7 @@ use Generator;
  */
 readonly class StreamStdin extends Input
 {
-    public function read(int $offset = null, int $limit = null, bool $filterEmpty = null): Generator
+    public function read(?int $offset = null, ?int $limit = null, ?bool $filterEmpty = null): Generator
     {
         yield from $this->streamInternal(STDIN, $filterEmpty ?? true, $offset ?? 0, $limit);
     }

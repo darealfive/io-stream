@@ -26,5 +26,5 @@ interface ReadableInterface
      *
      * @return iterable some iterable element where each element represents a single line.
      */
-    public function read(int $offset = null, int $limit = null, bool $filterEmpty = null): iterable;
+    public function read(?int $offset = null, ?int $limit = null, ?bool $filterEmpty = null): iterable;
 }
