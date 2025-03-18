@@ -1,0 +1,22 @@
+{
+    "name": "darealfive/io-stream",
+    "description": "Memory efficient stream processor for input and output streams",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Darealfive\\IoStream\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sebastian Krein"
+        }
+    ],
+    "require": {
+        "php": ">=8.2 <8.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10"
+    }
+}
