@@ -30,7 +30,7 @@ readonly abstract class OutputFile extends Output
 
             throw new Exception("Will not overwrite file '$file'.");
         }
-        if (!is_writable(($directory = dirname(realpath($file))))) {
+        if (!is_writable(($directory = dirname($file)))) {
 
             throw new Exception("Cannot write into directory '$directory'.");
         }
