@@ -14,5 +14,5 @@ namespace Darealfive\IoStream\output\format;
  */
 interface StreamableInterface
 {
-    public function stream(mixed $handle): int|false;
+    public function stream(mixed $handle, mixed $data): int|false;
 }

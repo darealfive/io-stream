@@ -16,8 +16,8 @@ namespace Darealfive\IoStream\output;
  */
 readonly class StreamFile extends OutputFile
 {
-    public function write(iterable $content, ?string $newLine = PHP_EOL): int
+    public function write(iterable $content): int
     {
-        return Output::stream($content, STDOUT, $newLine);
+        return $this->_write($content, fopen($this->file, 'x'));
     }
 }

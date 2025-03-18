@@ -25,7 +25,7 @@ readonly class StreamFile extends InputFile
      *
      * @return Generator<string>
      */
-    public function read(int $offset = null, int $limit = null, bool $filterEmpty = null): Generator
+    public function read(?int $offset = null, ?int $limit = null, ?bool $filterEmpty = null): Generator
     {
         try {
 

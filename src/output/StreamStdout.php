@@ -9,6 +9,9 @@ declare(strict_types=1);
 
 namespace Darealfive\IoStream\output;
 
+use Darealfive\IoStream\output\format\Plain;
+use Darealfive\IoStream\output\format\StreamableInterface;
+
 /**
  * Class StreamStdout
  *
@@ -16,8 +19,13 @@ namespace Darealfive\IoStream\output;
  */
 readonly class StreamStdout extends Output
 {
-    public function write(iterable|string $content, ?string $newLine = PHP_EOL): int
+    public function __construct(StreamableInterface $streamable = new Plain())
     {
-        return Output::stream(is_string($content) ? [$content] : $content, STDOUT, $newLine);
+        parent::__construct($streamable);
+    }
+
+    public function write(iterable $content): int
+    {
+        return $this->_write($content, STDOUT);
     }
 }

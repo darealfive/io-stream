@@ -16,12 +16,12 @@ namespace Darealfive\IoStream\output\format;
  */
 class Plain implements StreamableInterface
 {
-    public function __construct(public ?int $length = null)
+    public function __construct(public ?int $length = null, public ?string $eol = PHP_EOL)
     {
     }
 
-    public function stream(mixed $handle, string $data = '', ?int $length = null): int|false
+    public function stream(mixed $handle, mixed $data): int|false
     {
-        return fwrite($handle, $data, $length);
+        return fwrite($handle, "$data$this->eol", $this->length);
     }
 }

@@ -11,6 +11,7 @@ namespace Darealfive\IoStream\output;
 
 use Darealfive\IoStream\exception\InvalidArgumentException;
 use Darealfive\IoStream\exception\RuntimeException;
+use Darealfive\IoStream\output\format\StreamableInterface;
 
 /**
  * Class Output
@@ -19,6 +20,34 @@ use Darealfive\IoStream\exception\RuntimeException;
  */
 readonly abstract class Output implements WritableInterface
 {
+    public function __construct(private StreamableInterface $streamable)
+    {
+    }
+
+    final protected function _write(iterable $content, mixed $handle): int
+    {
+        if (!is_resource($handle)) {
+            throw new InvalidArgumentException("Argument 'handle' must be a resource, '" . gettype($handle) .
+                                               "' given!");
+        }
+
+        $bytesWrittenTotal = 0;
+        foreach ($content as $data) {
+
+            $bytesWritten = $this->streamable->stream($handle, $data);
+            if ($bytesWritten === false) {
+
+                throw new RuntimeException("Could not write to handle after '$bytesWrittenTotal' written bytes!");
+            }
+
+            $bytesWrittenTotal += $bytesWritten;
+        }
+
+        fclose($handle);
+
+        return $bytesWrittenTotal;
+    }
+
     /**
      * Implements basically the {@link WritableInterface::write()} interface to be used by child classes.
      *
@@ -29,7 +58,7 @@ readonly abstract class Output implements WritableInterface
      * @return int
      * @see WritableInterface::write() for documentation
      */
-    public static function stream(iterable $content, mixed $handle, ?string $newLine): int
+    final public static function stream(iterable $content, mixed $handle, ?string $newLine): int
     {
         if (!is_resource($handle)) {
             throw new InvalidArgumentException("Argument 'handle' must be a resource, '" . gettype($handle) .

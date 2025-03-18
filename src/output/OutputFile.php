@@ -10,6 +10,8 @@ declare(strict_types=1);
 namespace Darealfive\IoStream\output;
 
 use Darealfive\IoStream\exception\Exception;
+use Darealfive\IoStream\output\format\Plain;
+use Darealfive\IoStream\output\format\StreamableInterface;
 
 /**
  * Class OutputFile
@@ -21,8 +23,9 @@ readonly abstract class OutputFile extends Output
     /**
      * @throws Exception
      */
-    public function __construct(public string $file)
+    public function __construct(public string $file, StreamableInterface $streamable = new Plain())
     {
+        parent::__construct($streamable);
         if (file_exists($file)) {
 
             throw new Exception("Will not overwrite file '$file'.");

@@ -19,5 +19,5 @@ interface WritableInterface
      *
      * @return int number of bytes written
      */
-    public function write(iterable $content, ?string $newLine = PHP_EOL): int;
+    public function write(iterable $content): int;
 }

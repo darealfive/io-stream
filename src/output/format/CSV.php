@@ -23,7 +23,7 @@ readonly class CSV implements StreamableInterface
     {
     }
 
-    public function stream(mixed $handle, array $data = []): int|false
+    public function stream(mixed $handle, mixed $data): int|false
     {
         return fputcsv($handle, $data, $this->separator, $this->enclosure, $this->escape, $this->eol);
     }
